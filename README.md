@@ -33,12 +33,44 @@ _If we define a threshold, like 40 °C (an extreme heat temperature)_
 7. ¿Can we identify heat and cold waves? **DE**
 8. ¿Which places are becoming (tendencies) inhospitable? **DiP, T**
 
+_To find more info go to the appendix_
+
 ### Framework
 We decided to use pig, cause: --------
 
-### Results
 
-### Conclusions
+## Results
+
+## Conclusions
 
 ## Apendix
+### Waves
+We define a wave as an extended period of time where the temperature is outside the normal cotas.
+We stablish these cotas over a simple bibliographic investigation, and the methodology proposal. Here we clarify what we understand as core concepts:
+[Heat Waves](https://en.wikipedia.org/wiki/Heat_wave), 
+[Cold Waves](https://en.wikipedia.org/wiki/Cold_wave). <br>
+**Related Dangers:** <br>
+[Hypothermia](https://en.wikipedia.org/wiki/Hyperthermia) In humans, is defined as a body core temperature below 35.0 °C (95.0 °F) in humans.<br>
+[Hyperthermia](https://en.wikipedia.org/wiki/Hypothermia)  In humans, is defined as a body core temperature greater than 37.5–38.3 °C (99.5–100.9 °F) <br>
+This two, are conditions where an individual's body temperature is beyond normal or below normal, due to failed thermoregulation. In the case of hyperthermia the person's body produces or absorbs more heat than it dissipates and in the case of hypothermia losses more heat than it produces.
+Both conditions can produce death.
+
+We defined two standard cotas arbitrary to this study:
+- Heat wave > 40 °C.
+- Cold wave < 15 °C
+
+Even when these are normal temperatures around the globe, this values are set not only to represent changes in trends of temperatures, also to identify hostile environments to human life. These two represent a danger zone in every humidity percentage. 
+
 ![Hyperthermia and Hipothermia](https://cdn.mos.cms.futurecdn.net/ozBdgXNz2Nyn2hLz4cVyyc-650-80.jpg)
+
+### Events List
+#### Heat waves
+|when| where | T° | killed | source |
+|---|:---:|:---:|---:|----|
+|1896 August|Eastern North America | unknown | 1500| [wikipedia](https://en.wikipedia.org/wiki/List_of_heat_waves)
+|2002 July| China | unknown | 7 | [CNN](http://edition.cnn.com/2002/WORLD/asiapcf/east/07/17/china.heatwave/index.html)
+|2001 August| New Jersey| 41 °C | unknown| [wikipedia](https://en.wikipedia.org/wiki/List_of_heat_waves)
+|2003| Europe|  47 °C - 117 °F| 15.000| [BBC](http://news.bbc.co.uk/2/hi/europe/3139694.stm)
+
+
+#### Cold waves

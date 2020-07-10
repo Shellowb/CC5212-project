@@ -49,7 +49,3 @@ hdfs dfs -ls uhadoop2020/grupo08/project/temperature
 `pig -x local`
 
 
-### Get top of a various groups
-https://www.tutorialspoint.com/apache_pig/apache_pig_top.htm
-
-

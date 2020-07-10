@@ -5,15 +5,25 @@
 
 -- Load the Maind Data
 temperatures = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/temperature/GlobalTemperatures.csv' USING PigStorage(',') AS (date, avg, avgu, max, maxu, min, minu, loavg, loavgu);
+temperatures = FILTER temperatures BY GetYear(date) > 1800;
+
+-- General observation over Min Max -> there are some years that doesn't have all the data, and a null < anything in the comprarison.
 
 -- MAX AVG Over History (Get an automated peak)
-group_all = GROUP temperatures ALL;
-Tops = FOREACH group_all  GENERATE
-          (student_details.firstname, student_details.gpa), MAX(student_details.gpa);
+desc_order = ORDER temperatures BY max DESC;
+top1 = LIMIT desc_order 2;
+DUMP top1;
 
 -- MIN AVG Over History (Get an automated deep)
-asc_oredered = ORDER temperatures BY avg ASC;
+asc_order = ORDER temperatures BY min ASC;
+top2 = LIMIT asc_order 2;
+DUMP top2;
+
+
 -- STDEV Over History
+group_all = GROUP temperatures ALL;
+
+
 
 -- AVG Over Hisotry
 averages = FOREACH temperatures GENERATE average as date, AVERAGE($1);
