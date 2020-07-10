@@ -1,0 +1,12 @@
+# Folders
+/Data/temperatures/
+/Data/temperatures/GlobalLandTemperaturesByCity.csv
+/Data/temperatures/GlobalLandTemperaturesByCountry.csv
+/Data/temperatures/GlobalLandTemperaturesByMajorCity.csv
+/Data/temperatures/GlobalLandTemperaturesByState.csv
+/Data/temperatures/GlobalTemperatures.csv
+/Data/temperatures.zip
+
+
+# idea
+.idea
