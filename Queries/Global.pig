@@ -21,7 +21,7 @@ DUMP top2;
 
 
 -- STDEV Over History
-group_all = GROUP temperatures ALL;
+--group_all = GROUP temperatures ALL;
 
 
 
