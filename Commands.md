@@ -48,4 +48,9 @@ hdfs dfs -ls uhadoop2020/grupo08/project/temperature
 ### run local
 `pig -x local`
 
+### screen
+```shell script
+screen -r 21305.pts-32.cluster-01
+ctrl + a + d
+```
 

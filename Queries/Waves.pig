@@ -9,6 +9,14 @@
 -- Heat cota 40 °C
 -- Cold cota -15 °C
 
+
+cities = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/temperature/GlobalLandTemperaturesByCity.csv' USING PigStorage(',')
+AS (date , avg , agvu ,city , country,  la , lo);
+
+cities_heat_peak = FOREACH cities FILTER avg > 37
+
+
+
 /*      LOAD HELP
 
 cities = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/temperature/GlobalLandTemperaturesByCity.csv' USING PigStorage(',')
@@ -27,7 +35,3 @@ global = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/temperatu
 AS (date, avg, avgu, max, maxu, min, minu, loavg, loavgu);
 
  */
-
-
-global = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/temperature/GlobalTemperatures.csv' USING PigStorage(',')
-AS (date, avg, avgu, max, maxu, min, minu, loavg, loavgu);

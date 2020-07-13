@@ -46,8 +46,14 @@ We decided to use pig, cause: --------
 ## Apendix
 ### Waves
 We define a wave as an extended period of time where the temperature is outside the normal cotas.
-We stablish these cotas over a simple bibliographic investigation, and the methodology proposal. Here we clarify what we understand as core concepts:
-[Heat Waves](https://en.wikipedia.org/wiki/Heat_wave), 
+> A heat wave is a period of unusually hot weather that typically lasts two or more days. To be considered a heat wave, the temperatures have to be outside the historical averages for a given area.
+> >Bibliography 1
+
+Why study heat and cold waves?:
+> Heat waves like this may be less exciting or dramatic than other natural disasters like tornados, hurricanes, flooding, or even thunderstorms, but heat waves kill more people in the United States than all other weather-related disasters combined
+> > Bibliography 1
+
+more info [Heat Waves](https://en.wikipedia.org/wiki/Heat_wave),
 [Cold Waves](https://en.wikipedia.org/wiki/Cold_wave). <br>
 **Related Dangers:** <br>
 [Hypothermia](https://en.wikipedia.org/wiki/Hyperthermia) In humans, is defined as a body core temperature below 35.0 °C (95.0 °F) in humans.<br>
@@ -74,3 +80,10 @@ Even when these are normal temperatures around the globe, this values are set no
 
 
 #### Cold waves
+
+
+## Bibliography
+1. https://scijinks.gov/heat/
+2. https://www.voanews.com/silicon-valley-technology/scientists-identify-way-predict-heat-waves
+3. https://scijinks.gov/heat/
+4. https://journals.ametsoc.org/jcli/article/31/1/61/94701/Detection-of-Intraseasonal-Large-Scale-Heat-Waves
