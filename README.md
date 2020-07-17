@@ -66,7 +66,7 @@ more info [Heat Waves](https://en.wikipedia.org/wiki/Heat_wave),
 This two, are conditions where an individual's body temperature is beyond normal or below normal, due to failed thermoregulation. In the case of hyperthermia the person's body produces or absorbs more heat than it dissipates and in the case of hypothermia losses more heat than it produces.
 Both conditions can produce death.
 
-We defined two standard cotas arbitrary to this study:
+We defined two standard ranges arbitrary to this study:
 - Heat wave > 40 °C.
 - Cold wave < 15 °C
 
