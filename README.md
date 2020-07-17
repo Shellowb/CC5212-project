@@ -5,7 +5,8 @@ June 24, 2020
 
 
 ## Goal
-The current project pursuit to get useful conclusions about the temperature analysis on earth through the time (months) and places (positions, longitude and latitude) over the globe. This project studies the tendencies of temperatures, per zone and detecting events and places that became or could become risky (mainly temporary).
+The current project pursuit is to get useful conclusions about the temperature analysis on earth through the time (months) and places (positions, longitude and latitude) over the globe. This project studies the tendencies of temperatures, per zone and detecting events and places that became or could become risky in a near future.
+
 
 ## Data
 We use [Climate Change: Earth Surface Temperature Data](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data) dataset.
@@ -13,7 +14,7 @@ It's a monthly temperature series from 1750 to 2013.
 It's part of a scientific initiative pursuing to answer observations made by climate change sceptics.
 
 ## Methods
-We define four categories to analyse data:
+We define four categories to analyse the data:
 - **Trends (T):** we work with the average to generate an analysis over the time, and look for the tendencies in the temperature.
 - **Zoning (Z)**: Separate and order the data into zones, to look up in specific regions over the globe.
 - **Detect Events (DE)**: We want to detect particular events on the data such as heat waves, or cold waves.
@@ -37,12 +38,15 @@ _If we define a threshold, like 40 °C (an extreme heat temperature)_
 _To find more info go to the appendix_
 
 ### Framework
-We decided to use pig, cause: --------
+We decided to use PigLatin because it's simple, easy to program and its similar to SQL.
 
 
 ## Results
+While we managed to create pig Queries to obtain interesting datasets from the original data (using a smaller sample to test code's functionality), unfortunately due to the size of the original dataset and the demand of the server the pig process crashed so we couldn't obtain any results.
 
 ## Conclusions
+While we weren't able to get the final results we hoped for, we were able to create the codes necessary to obtain them, having successfully learned to use Pig and Hadoop in a way that can be applied to real world problems.
+Some fixes to the problems we encountered could be to segment the original dataset into smaller batches or try to implement the Queries in another platform. 
 
 ## Apendix
 ### Waves
@@ -84,7 +88,7 @@ Even when these are normal temperatures around the globe, this values are set no
 
 
 ## Bibliography
-1. https://scijinks.gov/heat/
+1. https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data
 2. https://www.voanews.com/silicon-valley-technology/scientists-identify-way-predict-heat-waves
 3. https://scijinks.gov/heat/
 4. https://journals.ametsoc.org/jcli/article/31/1/61/94701/Detection-of-Intraseasonal-Large-Scale-Heat-Waves
