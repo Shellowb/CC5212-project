@@ -29,6 +29,7 @@ In base of these categories we answer the following questions about the data.
 5. ¿Which is the tendency from the extreme marks zones (-20, 20 °C) **Z, T** <br> 
 
 _If we define a threshold, like 40 °C (an extreme heat temperature)_
+
 6. ¿How many times this threshold is exceed? **T, DE**
 7. ¿Can we identify heat and cold waves? **DE**
 8. ¿Which places are becoming (tendencies) inhospitable? **DiP, T**
