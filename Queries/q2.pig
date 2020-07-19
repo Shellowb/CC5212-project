@@ -37,4 +37,4 @@ max_min = FOREACH group_city_year GENERATE FLATTEN($0) AS (city, country, year),
 
 delta_T_by_city = FOREACH max_min GENERATE (max_T - min_T) AS delta_T, city AS city, country AS country, year AS year;
 
-STORE delta_T_by_city into '/uhadoop2020/uhadoop2020/grupo08/project/results';
+STORE delta_T_by_city into '/uhadoop2020/uhadoop2020/grupo08/project/';

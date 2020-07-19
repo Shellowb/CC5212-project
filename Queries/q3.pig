@@ -35,4 +35,4 @@ group_city_year = GROUP cities BY (city, country, year);
 -- For each city get average by year
 averages_cities = FOREACH group_city_year GENERATE FLATTEN($0) AS (city, country, year), AVG($1.avg) AS yearly_average;
 
-STORE averages_cities into '/uhadoop2020/uhadoop2020/grupo08/project/results';
+STORE averages_cities into '/uhadoop2020/uhadoop2020/grupo08/project/';
