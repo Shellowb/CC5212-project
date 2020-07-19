@@ -21,18 +21,18 @@
 
 -- Load the City data
 cities = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/temperature/GlobalLandTemperaturesByCity.csv' USING PigStorage(',')
-AS (date , avg , agvu ,city , country,  la , lo);
+AS (date:datetime, avg:float, avgu:float, city:chararray, country:chararray,  la:chararray, lo:chararray);
 
 
 -- Get year by date
-cities = FOREACH cities GENERATE GetYear(date) AS year;
+cities = FOREACH cities GENERATE GetYear(date) AS year, avg AS avg, city AS city, country AS country;
 
 -- GET THE MAX AND MIN OVER THE YEARS.
 
 -- Group by city and year
-group_city_year = GROUP cities BY (city, year)
+group_city_year = GROUP cities BY (city, country, year);
 
 -- For each city get average by year
-averages_cities = FOREACH group_city_year GENERATE FLATTEN($0) AS (country, year), AVG($1.avg) AS yearly_average;
+averages_cities = FOREACH group_city_year GENERATE FLATTEN($0) AS (city, country, year), AVG($1.avg) AS yearly_average;
 
-STORE averages_cities into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/';
+STORE averages_cities into '/uhadoop2020/uhadoop2020/grupo08/project/results';
