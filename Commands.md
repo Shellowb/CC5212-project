@@ -64,8 +64,4 @@ hdfs dfs -ls uhadoop2020/grupo08/project/temperature
 ```shell script
 screen -r 4286.pts-10.cluster-01
 ctrl + a + d
-```
-
-screen -r 19219.pts-12.cluster-01
-screen -d -r 19237.pts-12.cluster-01
-screen -d -r 19280.pts-12.cluster-01
+```s
