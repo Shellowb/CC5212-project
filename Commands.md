@@ -34,6 +34,18 @@ hdfs dfs -put GlobalLandTemperaturesByState.csv uhadoop2020/grupo08/project/temp
 hdfs dfs -put GlobalLandTemperaturesByMajorCity.csv uhadoop2020/grupo08/project/temperature
 hdfs dfs -put GlobalTemperatures.csv uhadoop2020/grupo08/project/temperature
 hdfs dfs -put GlobalLandTemperaturesByCity.csv uhadoop2020/grupo08/project/temperature
+
+
+hdfs dfs -put city_reduced.csv uhadoop2020/grupo08/project/temperature
+hdfs dfs -put country_reduced.csv uhadoop2020/grupo08/project/temperature
+hdfs dfs -put global_reduced.csv uhadoop2020/grupo08/project/temperature
+hdfs dfs -put majorCity_reduced.csv uhadoop2020/grupo08/project/temperature
+hdfs dfs -put state_reduced.csv uhadoop2020/grupo08/project/temperature
+```
+
+### Get results
+```shell script
+hdfs dfs -get /user/uhadoop/uhadoop2020/grupo08/project/results/avg results/
 ```
 
 ### Look into directory
@@ -50,7 +62,10 @@ hdfs dfs -ls uhadoop2020/grupo08/project/temperature
 
 ### screen
 ```shell script
-screen -r 21305.pts-32.cluster-01
+screen -r 4286.pts-10.cluster-01
 ctrl + a + d
 ```
 
+screen -r 19219.pts-12.cluster-01
+screen -d -r 19237.pts-12.cluster-01
+screen -d -r 19280.pts-12.cluster-01
