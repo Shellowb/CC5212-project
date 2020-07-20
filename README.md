@@ -45,8 +45,10 @@ We decided to use PigLatin because it's simple, easy to program and its similar 
 While we managed to create pig Queries to obtain interesting datasets from the original data (using a smaller sample to test code's functionality), unfortunately due to the size of the original dataset and the demand of the server the pig process crashed so we couldn't obtain any results.
 
 ## Conclusions
-While we weren't able to get the final results we hoped for, we were able to create the codes necessary to obtain them, having successfully learned to use Pig and Hadoop in a way that can be applied to real world problems.
-Some fixes to the problems we encountered could be to segment the original dataset into smaller batches or try to implement the Queries in another platform. 
+We were able to create the codes for almost all Queries, having successfully learned to use Pig and Hadoop in a way that can be applied to real world problems.
+Still, we encountered several problems with the lack of complex data analysis tools in Pig and had to resort to the use of complementary software.
+In future implementations and analysis it's recommended to consider another platform.
+
 
 ## Apendix
 ### Waves
