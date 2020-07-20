@@ -2,8 +2,8 @@
 * ¿Which places are becoming (tendencies) inhospitable? DiP, T
 *
 * treshold
-* heat 35
-* cold -8
+* heat 30
+* cold -4
 */
 
 /*test

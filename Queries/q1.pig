@@ -24,51 +24,88 @@
 country = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/temperature/country_reduced.csv' USING PigStorage(',')
 AS ( date, avg, avgu, country);
 */
-country = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/temperature/GlobalLandTemperaturesByCountry.csv' USING PigStorage(',')
-AS ( date, avg, avgu, country);
+countries = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/temperature/GlobalLandTemperaturesByCountry.csv' USING PigStorage(',') AS (date:datetime, avg:float, avgu:float, country:chararray);
 
 -- GET THE STANDARD DEV OVER THE YEARS.
 
 -- For each country generate average
-group_per_country = GROUP country BY country;
-avg_per_country = FOREACH group_per_country GENERATE flatten($0) AS country, AVG($1.avg) AS avg_p_c;
+countries_by_year = FOREACH countries GENERATE GetYear(date) AS year, avg AS avg, country AS country;
+group_contries_year = GROUP countries_by_year BY (country, year);
+year_avg_country = FOREACH group_contries_year GENERATE FLATTEN($0) AS (country, year), AVG($1.avg) AS yearly_average;
 
-STORE avg_per_country INTO 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/avg';
-
--- number of countries
-n = FOREACH group_per_country GENERATE flatten($0) AS country, COUNT($1.avg) AS count;
+STORE year_avg_country INTO 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/avgc';
+year_avg_per_country = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/avgc/part-r-00000'
+                  AS (country: chararray, year: int, yavg: float);
 
 -- generate square (x - avg)²
-avg_per_country = FILTER avg_per_country BY avg_p_c > 0;
-x = JOIN avg_per_country BY country, country By country;
-x = FOREACH x GENERATE $0 AS country, $1 AS avg_p_c, $3 AS avg;
-square_per_country = FOREACH x GENERATE country, (avg_p_c - avg)*(avg_p_c - avg) AS sq;
+filter_avg_per_country = FILTER year_avg_per_country BY yavg > 0;
+filter_year_avg_country = FILTER filter_avg_per_country BY year > 0;
+xi = JOIN filter_year_avg_country BY country, countries_by_year BY country;
+xj = FOREACH xi GENERATE $0 AS country, $1 AS year, $2 AS yavg, $4 as avg;
+square_per_country = FOREACH xj GENERATE country, year, (yavg - avg)*(yavg - avg) AS sq;
 
 -- sum (x_i - avg)²
 g_to_sum = GROUP square_per_country BY country;
 sumatory = FOREACH g_to_sum GENERATE $0 AS country, SUM($1.sq) AS s;
 
+-- number of avg per country by years
+n = FOREACH group_contries_year GENERATE flatten($0) AS (country, year), COUNT($1.avg) AS count;
+
 -- filter
 -- n = FOREACH group_per_country GENERATE flatten($0) AS country, COUNT($1.avg) AS count;
-number_of_countries = FILTER n BY count > 1;
-sumatory = FILTER sumatory BY $1 is not null;
+/*number_of_countries = FILTER n BY count > 1;
+sumatory = FILTER sumatory BY $1 is not null;*/
 
-STORE n into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/n_countries';
-STORE sumatory into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/sum_temp';
+STORE n into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/n_countries_yearly';
+STORE sumatory into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/sum_temp_yearly';
 
-n = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/n_countries/part-r-00000' USING PigStorage('\t')
-AS (country, count);
-sumatory = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/sum_temp/part-r-00000' USING PigStorage('\t')
-AS (country, sum);
+n_countries = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/n_countries_yearly/part-r-00000' USING PigStorage('\t')
+AS (country: chararray, year: int, count: int);
+sumatory_coutries = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/sum_temp_yearly/part-r-00000' USING PigStorage('\t')
+AS (country: chararray, year: int, count: double);
 
 -- division
-n_sumatory = JOIN sumatory BY country, n BY country; --- Error DESCONOCIDO;
-division = FOREACH n_sumatory GENERATE $0 AS country, (float)($1/$3) AS div;
+n_sumatory = JOIN sumatory_coutries BY country, n_countries BY country; --- Error DESCONOCIDO;
+division = FOREACH n_sumatory GENERATE $0 AS country, year, (float)($1/$3) AS div;
 
 -- GET STDDEV
-std = FOREACH division GENERATE country, SQRT(div);
+std = FOREACH division GENERATE country, year, SQRT(div) as std;
 
-STORE std into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/std';
+STORE std into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/std_by_year';
 
+-- avg std
+group_std_country = GROUP std BY country;
+std_year_avg = FOREACH group_std_country GENERATE flatten($0) AS country, AVG($1.std) AS avg_years;
 
+STORE std_year_avg into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/std_by_year_avg';
+std_years_avg = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/std_by_year_avg' USING PigStorage('\t')
+                AS (country: chararray, avg: double);
 
+-- std
+si = JOIN std_years_avg BY country, std BY country;
+sj = FOREACH si GENERATE $0 AS country, $1 AS year, $2 AS yavg, $4 as avg;
+square_std_country = FOREACH xj GENERATE country, year, (yavg - avg)*(yavg - avg) AS sq;
+
+-- number of countries
+n_std = FOREACH group_std_country GENERATE flatten($0) AS (country, year), COUNT($1.std) AS count;
+
+--
+g_std_sum = GROUP square_std_country BY country;
+std_sumatory = FOREACH g_std_sum GENERATE $0 AS country, SUM($1.sq) AS s;
+
+STORE n_std into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/n_std_countries';
+STORE sumatory into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/sum_std_temp';
+
+n_std_c = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/n_std_countries/part-r-00000' USING PigStorage('\t')
+AS (country: chararray, year: int, count: int);
+c_sumatory_std = LOAD 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/sum_std_temp/part-r-00000' USING PigStorage('\t')
+AS (country: chararray, year: int, count: double);
+
+-- division
+n_s = JOIN c_sumatory_std BY country, n_std_c BY country; --- Error DESCONOCIDO;
+std_division = FOREACH n_s GENERATE $0 AS country, year, (float)($1/$3) AS div;
+
+-- GET STDDEV
+std_std = FOREACH std_division GENERATE country, year, SQRT(div) as std;
+
+STORE std_std into 'hdfs://cm:9000/user/uhadoop/uhadoop2020/grupo08/project/results/std_std';
